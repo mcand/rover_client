@@ -25,4 +25,28 @@ class Rover
   def get_hover_position
     [@x, @y, @heading]
   end
+
+  def rotate(counterclock = false)
+    if counterclock
+      if @heading == 'N'
+        @heading = 'W'
+      elsif @heading == 'S'
+        @heading = 'E'
+      elsif @heading = 'E'
+        @heading = 'N'
+      else
+        @heading = 'S'
+      end
+    else
+      if @heading == 'N'
+        @heading = 'E'
+      elsif @heading == 'S'
+        @heading = 'W'
+      elsif @heading == 'E'
+        @heading = 'S'
+      else
+        @heading = 'N'
+      end
+    end
+  end
 end

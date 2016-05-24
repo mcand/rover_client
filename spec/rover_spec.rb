@@ -36,5 +36,19 @@ describe Rover do
     end
   end
 
+  describe "Rover is able to rotate" do
+    it "can rotate to right" do
+      rover = Rover.new(4, 2, 'N')
+      rover.rotate(false)
+      expect(rover.get_hover_position).to eq([4, 2, 'E'])
+    end
+
+    it "can rotate to left" do
+      rover = Rover.new(4, 2, 'S')
+      rover.rotate(true)
+      expect(rover.get_hover_position).to eq([4, 2, 'E'])
+    end
+  end
+
 
 end
