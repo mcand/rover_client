@@ -14,25 +14,25 @@ describe Rover do
     it "can move to North" do
       rover = Rover.new(4, 2, 'N')
       rover.move
-      expect(rover.get_hover_position).to eq([4, 3, 'N'])
+      expect(rover.get_rover_position).to eq([4, 3, 'N'])
     end
 
     it "can move to South" do
       rover = Rover.new(4, 2, 'S')
       rover.move
-      expect(rover.get_hover_position).to eq([4, 1, 'S'])
+      expect(rover.get_rover_position).to eq([4, 1, 'S'])
     end
 
     it "can move to East" do
       rover = Rover.new(4, 2, 'E')
       rover.move
-      expect(rover.get_hover_position).to eq([3, 2, 'E' ])
+      expect(rover.get_rover_position).to eq([5, 2, 'E' ])
     end
 
     it "can move to West" do
       rover = Rover.new(4, 2, 'W')
       rover.move
-      expect(rover.get_hover_position).to eq([5, 2, 'W'])
+      expect(rover.get_rover_position).to eq([3, 2, 'W'])
     end
   end
 
@@ -40,13 +40,13 @@ describe Rover do
     it "can rotate to right" do
       rover = Rover.new(4, 2, 'N')
       rover.rotate(false)
-      expect(rover.get_hover_position).to eq([4, 2, 'E'])
+      expect(rover.get_rover_position).to eq([4, 2, 'E'])
     end
 
     it "can rotate to left" do
       rover = Rover.new(4, 2, 'S')
       rover.rotate(true)
-      expect(rover.get_hover_position).to eq([4, 2, 'E'])
+      expect(rover.get_rover_position).to eq([4, 2, 'E'])
     end
   end
 

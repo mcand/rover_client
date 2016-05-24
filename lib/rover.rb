@@ -16,23 +16,23 @@ class Rover
     elsif @heading == 'S'
       @y = @y - 1
     elsif @heading == 'E'
-      @x = @x - 1
-    else
       @x = @x + 1
+    else
+      @x = @x - 1
     end
   end
 
-  def get_hover_position
+  def get_rover_position
     [@x, @y, @heading]
   end
 
-  def rotate(counterclock = false)
-    if counterclock
+  def rotate(left = false)
+    if left
       if @heading == 'N'
         @heading = 'W'
       elsif @heading == 'S'
         @heading = 'E'
-      elsif @heading = 'E'
+      elsif @heading == 'E'
         @heading = 'N'
       else
         @heading = 'S'
