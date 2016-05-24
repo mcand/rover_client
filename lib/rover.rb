@@ -9,4 +9,20 @@ class Rover
     @y = y
     @heading = heading
   end
+
+  def move
+    if @heading == 'N'
+      @y = @y + 1
+    elsif @heading == 'S'
+      @y = @y - 1
+    elsif @heading == 'E'
+      @x = @x - 1
+    else
+      @x = @x + 1
+    end
+  end
+
+  def get_hover_position
+    [@x, @y, @heading]
+  end
 end

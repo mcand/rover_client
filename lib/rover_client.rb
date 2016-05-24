@@ -12,7 +12,6 @@ class RoverClient
 
     map = get_map
 
-    puts "Coordenadas #{map.width} #{map.height}"
   end
 
   protected
@@ -25,7 +24,7 @@ class RoverClient
     end
 
     def self.welcome
-      puts "Welcome to RoverClient\n"
+      puts "Welcome to RoverClient \n"
       puts "Instructions:\n"
       puts "1. Enter the map size (e.g. 10 10)\n"
       puts "2. Enter the rover position x, y and position (e.g. 1 2 N) in the first line. Possible values for positions are [N]orth, [S]outh, [E]ast and [W]est\n"
