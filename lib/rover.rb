@@ -1,3 +1,6 @@
+#!/usr/bin/env ruby
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__)))
+
 class Rover
   attr_accessor :x, :y, :heading
 
