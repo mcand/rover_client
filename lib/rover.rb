@@ -2,51 +2,34 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__)))
 
 class Rover
+  HEADINGS = ['N', 'E', 'S', 'W'].freeze
+
   attr_accessor :x, :y, :heading
 
   def initialize(x, y, heading)
     @x = x
     @y = y
-    @heading = heading
+    @heading = HEADINGS.find_index(heading)
   end
 
   def move
-    if @heading == 'N'
-      @y = @y + 1
-    elsif @heading == 'S'
-      @y = @y - 1
-    elsif @heading == 'E'
-      @x = @x + 1
-    else
-      @x = @x - 1
+    case @heading
+      when 0 then @y += 1
+      when 1 then @x += 1
+      when 2 then @y -= 1
+      when 3 then @x -= 1
     end
   end
 
   def get_rover_position
-    [@x, @y, @heading]
+    [@x, @y, Rover::HEADINGS[@heading]]
   end
 
   def rotate(left = false)
     if left
-      if @heading == 'N'
-        @heading = 'W'
-      elsif @heading == 'S'
-        @heading = 'E'
-      elsif @heading == 'E'
-        @heading = 'N'
-      else
-        @heading = 'S'
-      end
+      @heading == 0 ? @heading = 3 : @heading -= 1
     else
-      if @heading == 'N'
-        @heading = 'E'
-      elsif @heading == 'S'
-        @heading = 'W'
-      elsif @heading == 'E'
-        @heading = 'S'
-      else
-        @heading = 'N'
-      end
+      @heding == 3 ? @heading = 0 : @heading += 1
     end
   end
 end

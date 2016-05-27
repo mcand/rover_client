@@ -7,7 +7,7 @@ describe Rover do
 
     expect(rover.x).to eq(3)
     expect(rover.y).to eq(4)
-    expect(rover.heading).to eq('N')
+    expect(rover.heading).to eq(0)
   end
 
   describe "Rover is able to move to positions" do
@@ -49,6 +49,4 @@ describe Rover do
       expect(rover.get_rover_position).to eq([4, 2, 'E'])
     end
   end
-
-
 end
