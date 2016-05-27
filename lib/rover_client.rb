@@ -12,6 +12,8 @@ class RoverClient
 
     map = get_map
 
+    return unless map
+
     begin
       rover = get_rover
       rovers << [rover, get_rover_instructions] if rover
@@ -22,17 +24,19 @@ class RoverClient
       instructions = current_rover[1]
 
       for instruction in instructions.split('')
-        if instruction == 'M'
+        if instruction == 'M' && rover.rover_in_map?(map.width.to_i, map.height.to_i) # Rover cannot move out of map (bounder acts like a wall)
           rover.move
         elsif instruction == 'R'
           rover.rotate()
         elsif instruction == 'L'
           rover.rotate(true)
+        else
+          return
         end
       end if instructions
 
+      puts "Rover out of map bounds" unless rover.rover_in_map?(map.width.to_i, map.height.to_i)
       puts '%d %d %s' % rover.get_rover_position
-
     end
   end
 
@@ -46,54 +50,26 @@ class RoverClient
     end
 
     def self.get_map
-      map_params = gets.chomp
-
-      map_dimentions = map_params.split.map!(&:to_i)
-
-      Map.new(map_dimentions[0], map_dimentions[1])
+      until (input = gets) && (input =~ /(\d+)\s+(\d+)/)
+        return  nil if input.to_s.chomp.empty?
+        puts 'Invalid map inputs'
+      end
+      Map.new($1.to_s, $2.to_s)
     end
 
     def self.get_rover
-      headings = ['N', 'S', 'E', 'W']
-      rover_params = gets.upcase.chomp
-
-      rover_locale = rover_params.split
-
-      if rover_locale.length != 3
-        puts "Couldn't read rover locale"
-        return
-      else
-        x = rover_locale[0].to_i
-        y = rover_locale[1].to_i
-        heading = rover_locale[2]
-
-        if headings.include?(heading)
-          return Rover.new(x, y, heading)
-        else
-          puts "Direction is invalid"
-          return
-        end
+      until (input = gets) && (input =~ /(\d+)\s+(\d+)\s([NSWE])/i)
+        return if input.to_s.chomp.empty?
+        puts "Invalid rover input"
       end
+      Rover.new($1.to_i, $2.to_i, $3.to_s.upcase)
     end
 
     def self.get_rover_instructions
-      allowed_movements = ['L', 'R', 'M']
-
-      movements_string = gets.upcase.chomp
-
-      puts "Move Strings #{movements_string}"
-
-      movements = movements_string.split('')
-
-      puts "Movements #{movements}"
-
-      movements.each do |m|
-        unless allowed_movements.include?(m)
-          puts "It seems you have entered an invalid movement!"
-          return
-        end
+      until (input = gets) && (input =~ /([RLM]+)/i)
+        return nil if input.to_s.chomp.empty?
+        puts "Invalid rover instruction"
       end
-
-      movements_string
+      return $1.to_s.upcase
     end
 end

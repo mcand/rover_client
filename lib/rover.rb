@@ -32,4 +32,8 @@ class Rover
       @heding == 3 ? @heading = 0 : @heading += 1
     end
   end
+
+  def rover_in_map?(width, height)
+    @x.between?(0, width) && @y.between?(0, height)
+  end
 end
